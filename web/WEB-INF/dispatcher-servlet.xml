@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+    <context:component-scan base-package="controller"></context:component-scan>
+    <mvc:annotation-driven></mvc:annotation-driven>
+    <context:annotation-config></context:annotation-config>
+
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/admin/"
+          p:suffix=".jsp" />
+
+    
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"></property>
+        <property name="url" value="jdbc:sqlserver://localhost:1433;databaseName=OnlineShopServiceJava"></property>
+        <property name="username" value="sa"></property>
+        <property name="password" value="150297"></property>
+    </bean>
+    
+    <bean id="hibernateConfig" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="annotatedClasses">
+            <list>
+                <value>entity.Abouts</value>
+                <value>entity.Categories</value>
+                <value>entity.Contacts</value>
+                <value>entity.Contents</value>
+                <value>entity.FeedBacks</value>
+                <value>entity.Footers</value>
+                <value>entity.OrderDetails</value>
+                <value>entity.Orders</value>
+                <value>entity.Producers</value>
+                <value>entity.Products</value>
+                <value>entity.Slides</value>
+                <value>entity.UserGroups</value>
+                <value>entity.Users</value>
+                <value>entity.MyItem</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="aboutsDAO" class="daoimpl.AboutsDAOImpl">
+        <property name="sessionFactory" ref="hibernateConfig"></property>
+    </bean>
+    <bean id="categoriesDAO" class="daoimpl.CategoriesDAOImpl">
+        <property name="sessionFactory" ref="hibernateConfig"></property>
+    </bean>
+    <bean id="contactsDAO" class="daoimpl.ContactsDAOImpl">
+        <property name="sessionFactory" ref="hibernateConfig"></property>
+    </bean>
+    <bean id="contentsDAO" class="daoimpl.ContentsDAOImpl">
+        <property name="sessionFactory" ref="hibernateConfig"></property>
+    </bean>
+    <bean id="feedBacksDAO" class="daoimpl.FeedBacksDAOImpl">
+        <property name="sessionFactory" ref="hibernateConfig"></property>
+    </bean>
+    <bean id="footersDAO" class="daoimpl.FootersDAOImpl">
+        <property name="sessionFactory" ref="hibernateConfig"></property>
+    </bean>
+    <bean id="orderDetailsDAO" class="daoimpl.OrderDetailsDAOImpl">
+        <property name="sessionFactory" ref="hibernateConfig"></property>
+    </bean>
+    <bean id="ordersDAO" class="daoimpl.OrdersDAOImpl">
+        <property name="sessionFactory" ref="hibernateConfig"></property>
+    </bean>
+    <bean id="producersDAO" class="daoimpl.ProducersDAOImpl">
+        <property name="sessionFactory" ref="hibernateConfig"></property>
+    </bean>
+    <bean id="productsDAO" class="daoimpl.ProductsDAOImpl">
+        <property name="sessionFactory" ref="hibernateConfig"></property>
+    </bean>
+    <bean id="slidesDAO" class="daoimpl.SlidesDAOImpl">
+        <property name="sessionFactory" ref="hibernateConfig"></property>
+    </bean>
+    <bean id="userGroupsDAO" class="daoimpl.UserGroupsDAOImpl">
+        <property name="sessionFactory" ref="hibernateConfig"></property>
+    </bean>
+    <bean id="usersDAO" class="daoimpl.UsersDAOImpl">
+        <property name="sessionFactory" ref="hibernateConfig"></property>
+    </bean>
+</beans>
