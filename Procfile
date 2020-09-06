@@ -1,2 +1,1 @@
-web: java -jar target/ProjectJavaWebSpringHibernate.jar
-web: gunicorn ecommerce2.wsgi
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/*.jar
